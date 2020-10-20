@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-docker
+  name: spring-docker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-docker
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-docker
+    spec:
+      containers:
+      - image: asmanaeem/spring-docker
+        name: spring-docker
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-docker
+  name: spring-docker
+spec:
+  ports:
+  - name: 9000-9000
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: spring-docker
+  type: ClusterIP
+status:
+  loadBalancer: {}
